@@ -1,36 +1,19 @@
 // ============================================================================
-// Main — Note navigation, tabs, sidebar, search
+// Main — Graph-first navigation, note panel, minimap
 // ============================================================================
 
-let currentNote = 'welcome';
-let openTabs = ['welcome'];
+let graph;
+let noteOpen = false;
 
 function openNote(noteId) {
     if (!NOTES[noteId]) return;
 
-    currentNote = noteId;
-
-    // Update sidebar active state
-    document.querySelectorAll('.file').forEach(f => f.classList.remove('active'));
-    const fileEl = document.querySelector(`.file[data-note="${noteId}"]`);
-    if (fileEl) fileEl.classList.add('active');
-
-    // Add to tabs if not already open
-    if (!openTabs.includes(noteId)) {
-        openTabs.push(noteId);
-    }
-    renderTabs();
-
-    // Render note content
-    renderNote(noteId);
-
-    // Close mobile sidebar
-    document.getElementById('sidebar').classList.remove('open');
-}
-
-function renderNote(noteId) {
     const note = NOTES[noteId];
-    const view = document.getElementById('noteView');
+    const panel = document.getElementById('notePanel');
+    const body = document.getElementById('noteBody');
+    const titleBar = document.getElementById('noteTitleBar');
+    const minimap = document.getElementById('minimap');
+    const hint = document.getElementById('headerHint');
 
     // Build backlinks
     const backlinks = [];
@@ -52,95 +35,41 @@ function renderNote(noteId) {
         `;
     }
 
-    view.innerHTML = `<div class="note">${note.content}${backlinkHtml}</div>`;
-    view.scrollTop = 0;
-}
+    body.innerHTML = `<div class="note">${note.content}${backlinkHtml}</div>`;
+    body.scrollTop = 0;
+    titleBar.textContent = note.title;
 
-function renderTabs() {
-    const tabBar = document.getElementById('tabBar');
-    tabBar.innerHTML = openTabs.map(noteId => {
-        const note = NOTES[noteId];
-        const isActive = noteId === currentNote;
-        return `
-            <div class="tab ${isActive ? 'active' : ''}" data-note="${noteId}" onclick="openNote('${noteId}')">
-                <span>${note.title}</span>
-                ${openTabs.length > 1 ? `<button class="tab-close" onclick="closeTab(event, '${noteId}')">x</button>` : ''}
-            </div>
-        `;
-    }).join('');
-}
+    panel.classList.add('open');
+    minimap.classList.add('visible');
+    hint.classList.add('hidden');
+    noteOpen = true;
 
-function closeTab(event, noteId) {
-    event.stopPropagation();
-    const idx = openTabs.indexOf(noteId);
-    if (idx === -1 || openTabs.length <= 1) return;
-
-    openTabs.splice(idx, 1);
-
-    if (currentNote === noteId) {
-        const newIdx = Math.min(idx, openTabs.length - 1);
-        openNote(openTabs[newIdx]);
-    } else {
-        renderTabs();
+    // Update graph selection
+    if (graph) {
+        graph.selectedNode = graph.nodes.find(n => n.id === noteId) || null;
+        graph.drawMinimap(document.getElementById('minimapCanvas'));
     }
 }
 
-function toggleFolder(headerEl) {
-    const folder = headerEl.parentElement;
-    folder.classList.toggle('open');
+function closeNote() {
+    const panel = document.getElementById('notePanel');
+    const minimap = document.getElementById('minimap');
+    const hint = document.getElementById('headerHint');
+
+    panel.classList.remove('open');
+    minimap.classList.remove('visible');
+    hint.classList.remove('hidden');
+    noteOpen = false;
+
+    if (graph) graph.selectedNode = null;
 }
 
-function toggleSidebar() {
-    document.getElementById('sidebar').classList.toggle('open');
-}
+// Escape key closes note
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && noteOpen) closeNote();
+});
 
-function toggleGraph() {
-    const panel = document.getElementById('graphPanel');
-    const isOpen = panel.classList.toggle('open');
-
-    if (isOpen && !graphInstance) {
-        graphInstance = new GraphView(document.getElementById('graphCanvas'));
-    } else if (isOpen && graphInstance) {
-        graphInstance.resize();
-        graphInstance.buildGraph();
-    }
-}
-
-// Search
+// Init
 document.addEventListener('DOMContentLoaded', () => {
-    const searchInput = document.getElementById('searchInput');
-
-    searchInput.addEventListener('input', (e) => {
-        const query = e.target.value.toLowerCase().trim();
-        const files = document.querySelectorAll('.file');
-
-        files.forEach(file => {
-            const name = file.querySelector('span').textContent.toLowerCase();
-            const noteId = file.dataset.note;
-            const note = NOTES[noteId];
-            const tags = note ? note.tags.join(' ').toLowerCase() : '';
-
-            if (!query || name.includes(query) || tags.includes(query)) {
-                file.style.display = '';
-            } else {
-                file.style.display = 'none';
-            }
-        });
-    });
-
-    // Keyboard shortcut: Ctrl+P to focus search
-    document.addEventListener('keydown', (e) => {
-        if ((e.ctrlKey || e.metaKey) && e.key === 'p') {
-            e.preventDefault();
-            searchInput.focus();
-        }
-        if (e.key === 'Escape') {
-            searchInput.blur();
-            searchInput.value = '';
-            searchInput.dispatchEvent(new Event('input'));
-        }
-    });
-
-    // Load initial note
-    openNote('welcome');
+    graph = new Graph(document.getElementById('graph'));
 });
