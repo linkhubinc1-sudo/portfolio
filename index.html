@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>James Barber III</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="app">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <div class="vault-name">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
+                    James Barber III
+                </div>
+            </div>
+            <div class="sidebar-search">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                <input type="text" placeholder="Search notes..." id="searchInput">
+            </div>
+            <nav class="file-tree">
+                <div class="folder open" data-folder="root">
+                    <div class="folder-header" onclick="toggleFolder(this)">
+                        <svg class="chevron" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
+                        <span>Home</span>
+                    </div>
+                    <div class="folder-children">
+                        <div class="file active" data-note="welcome" onclick="openNote('welcome')">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                            <span>Welcome</span>
+                        </div>
+                        <div class="file" data-note="about" onclick="openNote('about')">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                            <span>About Me</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="folder open" data-folder="life">
+                    <div class="folder-header" onclick="toggleFolder(this)">
+                        <svg class="chevron" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
+                        <span>Life</span>
+                    </div>
+                    <div class="folder-children">
+                        <div class="file" data-note="early-days" onclick="openNote('early-days')">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                            <span>Early Days</span>
+                        </div>
+                        <div class="file" data-note="finding-code" onclick="openNote('finding-code')">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                            <span>Finding Code</span>
+                        </div>
+                        <div class="file" data-note="slu" onclick="openNote('slu')">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                            <span>Saint Louis University</span>
+                        </div>
+                        <div class="file" data-note="creative-side" onclick="openNote('creative-side')">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                            <span>The Creative Side</span>
+                        </div>
+                        <div class="file" data-note="whats-next" onclick="openNote('whats-next')">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                            <span>What's Next</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="folder open" data-folder="projects">
+                    <div class="folder-header" onclick="toggleFolder(this)">
+                        <svg class="chevron" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
+                        <span>Projects</span>
+                    </div>
+                    <div class="folder-children">
+                        <div class="file" data-note="weather-llm" onclick="openNote('weather-llm')">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                            <span>WeatherMind</span>
+                        </div>
+                        <div class="file" data-note="linkhub" onclick="openNote('linkhub')">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                            <span>LinkHub</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="folder open" data-folder="skills">
+                    <div class="folder-header" onclick="toggleFolder(this)">
+                        <svg class="chevron" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
+                        <span>Skills</span>
+                    </div>
+                    <div class="folder-children">
+                        <div class="file" data-note="skills" onclick="openNote('skills')">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                            <span>Technical Skills</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="folder open" data-folder="photography">
+                    <div class="folder-header" onclick="toggleFolder(this)">
+                        <svg class="chevron" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
+                        <span>Photography</span>
+                    </div>
+                    <div class="folder-children">
+                        <div class="file" data-note="photography" onclick="openNote('photography')">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                            <span>Gallery</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="folder" data-folder="contact">
+                    <div class="folder-header" onclick="toggleFolder(this)">
+                        <svg class="chevron" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
+                        <span>Contact</span>
+                    </div>
+                    <div class="folder-children">
+                        <div class="file" data-note="contact" onclick="openNote('contact')">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                            <span>Get in Touch</span>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+            <div class="sidebar-footer">
+                <button class="sidebar-btn" onclick="toggleGraph()" title="Graph View">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="2"/><circle cx="6" cy="6" r="2"/><circle cx="18" cy="6" r="2"/><circle cx="6" cy="18" r="2"/><circle cx="18" cy="18" r="2"/><line x1="8" y1="8" x2="10" y2="10"/><line x1="14" y1="10" x2="16" y2="8"/><line x1="8" y1="16" x2="10" y2="14"/><line x1="14" y1="14" x2="16" y2="16"/></svg>
+                </button>
+            </div>
+        </aside>
+
+        <!-- Mobile toggle -->
+        <button class="mobile-toggle" id="mobileToggle" onclick="toggleSidebar()">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        </button>
+
+        <!-- Main Content -->
+        <main class="content" id="content">
+            <!-- Tab bar -->
+            <div class="tab-bar" id="tabBar">
+                <div class="tab active" data-note="welcome" onclick="openNote('welcome')">
+                    <span>Welcome</span>
+                    <button class="tab-close" onclick="closeTab(event, 'welcome')">x</button>
+                </div>
+            </div>
+
+            <!-- Note content area -->
+            <div class="note-view" id="noteView">
+                <!-- Content injected by JS -->
+            </div>
+        </main>
+
+        <!-- Graph View Panel -->
+        <div class="graph-panel" id="graphPanel">
+            <div class="graph-header">
+                <span>Graph View</span>
+                <button onclick="toggleGraph()" class="graph-close">x</button>
+            </div>
+            <canvas id="graphCanvas"></canvas>
+        </div>
+    </div>
+
+    <script src="js/notes.js"></script>
+    <script src="js/graph.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>
